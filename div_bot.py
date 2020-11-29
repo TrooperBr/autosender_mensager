@@ -30,7 +30,7 @@ class Divulgation:
             self.send_to_room(self.get_payload(), channel_id)
             self.change_windows_color()
 
-
+    #you can add a name with the mensage add [NAME] on menssage and creating a get_people_name function
     def get_msg(self, name='juau'):
         _str = ''
         c = 1
@@ -44,16 +44,17 @@ class Divulgation:
 
 
     def change_windows_color(self):
-        os.system(f'color 0{random.choice(self.colors)}')
+        if os.name == 'nt':
+            os.system(f'color 0{random.choice(self.colors)}')
 
 
     def get_nonce(self):
         return self.for_nonce[1]+((time.time()-self.for_nonce[1])*1_00_0000_0000)
 
-
+    #you can make a outher def or adapt this function for channels messagens
     def get_headers_pv(self,token, pv_id):
         return {'Authorization':token,
-        'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0',
+        'User-Agent':self.random_agent(),
         'Connection':'keep-alive',
         'Content-Type':'application/json',
         'Host':'discord.com',
@@ -75,18 +76,16 @@ class Divulgation:
             prepper.headers['content-type'] = 'application/json'
             r = self.session.send(prepper, verify=True) #se bugar troca o veridy=True para False e testa denovo
             if r.status_code == 200:
-                print('Trava Enviada Com Sucesso!!')
+                print('sended !')
             elif r.status_code == 429:
                 data = json.loads(r.text)
-                print(f'Voltando a enviar daqui {data["retry_after"]} segundos!!')
+                print('Wait')
                 time.sleep(data['retry_after'])
             else:
-                print(f'Houve Um Erro CRITÍCO! | {r.status_code}')
-                asr = 1#input('digite 1 para ver o texto :')
-                if asr == 1:
-                    print(r.text)
-        except Exception as errorWarn:
-            print('Houve Um Erro CRITÍCO! | {}'.format(errorWarn))
+                print(f'erro {r.status_code}')
+
+        except Exception as e:
+            print(errorWarn)
 
 
 
