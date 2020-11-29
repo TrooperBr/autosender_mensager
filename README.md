@@ -18,7 +18,14 @@ pip install -r requirements.txt
  you make a updates on class Divulgation or run a __main__ file
 ```python#
 from div_bot import Divulgation
+
 Divulgation(token, mensage, channel_id)
 ```
+or
+```bash
+python3 __main__.py
+```
+
+
 ## License
 [MIT](https://github.com/TrooperBr/autosender_mensager/blob/main/LICENSE)
