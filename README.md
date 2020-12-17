@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 ##Usage
  you make a updates on class Divulgation or run a __main__ file
-```python#
+```py
 from div_bot import Divulgation
 
 Divulgation(token, mensage, channel_id)
